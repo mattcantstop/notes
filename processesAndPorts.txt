@@ -1,0 +1,7 @@
+# View processes on Port 3000
+lsof -wni tcp:3000
+
+# View Unicorn processes and kill them
+watch "ps afx | grep uni"
+kill -9 pid (kill -QUIT 1234)
+watch "ps afx | grep uni"

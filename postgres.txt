@@ -1,0 +1,28 @@
+### Installation
+brew install postgres
+
+### Start Server
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+
+### Setting Up Postgres User and Database (http://stackoverflow.com/questions/9987171/rails-3-2-fatal-peer-authentication-failed-for-user-pgerror)
+If you installed postresql on your server then just host: localhost to database.yml, I usually throw it in around where it says pool: 5. Otherwise if it's not localhost definitely tell that app where to find its database.
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: kickrstack_development
+  host: localhost
+  pool: 5
+  username: kickrstack
+  password: secret
+Make sure your user credentials are set correctly by creating a database and assigning ownership to your app's user to establish the connection. To create a new user in postgresql 9 run:
+
+sudo -u postgres psql
+set the postgresql user password if you haven't, it's just backslash password.
+
+postgres=# \password
+Create a new user and password and the user's new database:
+
+postgres=# create user "guy_on_stackoverflow" with password 'keepitonthedl';
+postgres=# create database "dcaclab_development" owner "guy_on_stackoverflow"; 
+Now update your database.yml file after you've confirmed creating the database, user, password and set these privileges. Don't forget host: localhost.
